@@ -31,7 +31,6 @@ pls_lm <- list(label = "PLS-lm",
                  data <- as.data.frame(cbind(scores,X_nm))
                  colnames.pred <- colnames(data)
                  data$y <- y
-                 #model <- randomForest(scores, y, mtry = param$mtry, ...)
                  model.formula <- as.formula(paste0("y ~ ", paste0(colnames.pred,collapse = " + "),sep = ""))
                  model <- lm(model.formula, data = data, na.action = "na.exclude")
                  model$projection <- loadings

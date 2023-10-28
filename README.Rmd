@@ -33,14 +33,60 @@ devtools::install_github("girelaignacio/MultidimensionalPovertyPrediction")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
+```{r intro}
 library(MultidimensionalPovertyPrediction)
 ## basic example code
 
-target <- "mpi_Other"
-which.dataframe <- 1
+target <- "MPI"
+which.data <- 1
 
-#results <- RandomKfoldCV.Model(target, which.dataframe)
+data <- preprocessing.dataframe(which.data, target, time.format = "trend")
+
+head(data)
+```
+
+###### Set parameters for tuning parameters
+```{r tuning_parm}
+### Set parameters for tuning parameters
+n_folds <- 5
+n_comp <- 10
+
+```
+
+##### Split train and test data
+```{r splitdata}
+train_index <- caret::createDataPartition(selected.df[,target], p = 0.8, list = FALSE, times = 1)
+data_train <- data[train_index,]
+data_test <- data[-train_index,]
+ytrain <- data_train[,target] ; Xtrain <- data_train[,-1]
+ytest <- data_test[,target] ; Xtest <- data_test[,-1]
 ```
 
 
+###### Set train fitting control
+```{r set_fitcontrol}
+CV_index <- caret::createResample(data[,target])
+
+fitControl <- caret::trainControl(method="cv",
+                                  number=n_folds,
+                                  index = CV_index)
+```
+
+##### Fit a model (PLS with linear model)
+```{r pls-lm}
+pls_lm.fit <- caret::train(x = Xtrain, y = ytrain, 
+                 method = pls_lm, 
+                 ncomp = 10,
+                 trControl = fitControl,
+                 verbose = FALSE)
+```
+
+###### Predict!
+```{r pls-lm_pred}
+ypred <- predict(lm.fit, Xtest)
+```
+
+###### Check error
+```{r errors}
+mean((ytest - ypred)^2)
+```
