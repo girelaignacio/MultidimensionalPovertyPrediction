@@ -40,7 +40,7 @@ library(MultidimensionalPovertyPrediction)
 target <- "MPI"
 which.data <- 1
 
-data <- preprocessing.dataframe(which.data, target, time.format = "trend")
+data <- preprocessing.data(which.data, target, time.format = "trend")
 
 head(data)
 ```

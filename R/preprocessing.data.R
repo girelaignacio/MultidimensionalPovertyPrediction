@@ -1,5 +1,5 @@
 #' @export
-preprocessing.dataframe <- function(which.data, target, time.format){
+preprocessing.data <- function(which.data, target, time.format){
   ## Select the data.frame with `which.data`
   data <- select_dataframes(which.data)
 
