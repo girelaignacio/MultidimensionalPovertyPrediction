@@ -15,4 +15,5 @@ Depends:
 LazyData: true
 Imports: 
     caret,
+    chemometrics,
     stats

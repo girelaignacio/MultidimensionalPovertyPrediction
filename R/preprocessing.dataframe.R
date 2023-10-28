@@ -7,19 +7,19 @@ preprocessing.dataframe <- function(which.data, target, time.format = c("trend",
   y <- data[,target]
   ## Preserve predictors
   X <- data[,-c(1:8)]
-  ## Create time format as dummy variabels (one-hot encoding) or as a trend
+  ## Create time format as dummy variables (one-hot encoding) or as a trend
   if (time.format == "dummy"){
     time_ <- factor(data$Year)
-    time_ <- model.matrix( ~ time_)[,-1]
+    time_ <- stats::model.matrix( ~ time_)[,-1]
 
   } else {
     t <- as.numeric(as.character(data$Year))
-    time_ <- t - min(df$Year)
+    time_ <- t - min(data$Year)
   }
 
   ## Set regions as dummy variables (one-hot encoding)
   region_ <-  factor(data$Region)
-  R <- model.matrix( ~ region_)[,-1]
+  R <- stats::model.matrix( ~ region_)[,-1]
   colnames(R) <- gsub(pattern = "&", x =  colnames(R), replacement = "and")
   colnames(R) <- gsub(pattern = "-", x =  colnames(R), replacement = "")
   colnames(R) <- gsub(pattern = " ", x =  colnames(R), replacement = "")
