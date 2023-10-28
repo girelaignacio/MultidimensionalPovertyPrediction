@@ -1,4 +1,3 @@
-#' @export
 RandomKfoldCV.Model <- function(target, which.dataframe){
   data <- select_dataframes(which.dataframe)
 
