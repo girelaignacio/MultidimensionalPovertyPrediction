@@ -50,7 +50,6 @@ head(data)
 ### Set parameters for tuning parameters
 n_folds <- 5
 n_comp <- 10
-
 ```
 
 ##### Split train and test data

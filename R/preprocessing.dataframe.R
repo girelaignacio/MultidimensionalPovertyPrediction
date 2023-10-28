@@ -1,5 +1,5 @@
 #' @export
-preprocessing.dataframe <- function(which.data, target, time.format = c("trend","dummy")){
+preprocessing.dataframe <- function(which.data, target, time.format){
   ## Select the data.frame with `which.data`
   data <- select_dataframes(which.data)
 
@@ -11,7 +11,6 @@ preprocessing.dataframe <- function(which.data, target, time.format = c("trend",
   if (time.format == "dummy"){
     time_ <- factor(data$Year)
     time_ <- stats::model.matrix( ~ time_)[,-1]
-
   } else {
     t <- as.numeric(as.character(data$Year))
     time_ <- t - min(data$Year)
