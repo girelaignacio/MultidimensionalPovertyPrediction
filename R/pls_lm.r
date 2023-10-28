@@ -1,4 +1,5 @@
-pls_lm <- list(label = "PLS-lm",
+pls_lm <- function(){
+  pls_lm <- list(label = "PLS-lm",
                library = c("chemometrics", "stats"),
                type = "Regression",
                ## Tune over both parameters at the same time
@@ -60,4 +61,6 @@ pls_lm <- list(label = "PLS-lm",
                predictors = function(x, ...) rownames(x$projection),
                levels = function(x) x$obsLevels,
                sort = function(x) x[order(x[,1]),])
+  pls_lm
+}
 

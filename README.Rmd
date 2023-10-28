@@ -24,7 +24,7 @@ The goal of MultidimensionalPovertyPrediction is to ...
 
 You can install the development version of MultidimensionalPovertyPrediction from [GitHub](https://github.com/) with:
 
-``` r
+```{r install}
 # install.packages("devtools")
 devtools::install_github("girelaignacio/MultidimensionalPovertyPrediction")
 ```
