@@ -38,14 +38,18 @@ pls_lm <- list(label = "PLS-lm",
                },
                predict = function(modelFit, newdata, submodels = NULL) {
                  ## Now apply the same scaling to the new samples
-                 X <- newdata[, -grep("^region_",colnames(newdata))]
+                 col.region_ <- grep("^region_", colnames(newdata))
+                 col.time_ <- grep("^time_", colnames(newdata))
+                 col.out <- c(col.region_, col.time_)
+                 X <- newdata[, - col.out]
                  print(dim(X))
                  print(dim(newdata))
                  scores <- as.matrix(X) %*% modelFit$projection
                  colnames(scores) <- paste("score", 1:ncol(scores), sep = "")
                  scores <- as.data.frame(scores)
 
-                 X_nm <- newdata[, grep("^region_",colnames(newdata))]
+                 #X_nm <- newdata[, grep("^region_",colnames(newdata))]
+                 X_nm <- newdata[, col.out]
 
                  newdata <- cbind(X_nm,scores)
                  ## Predict the linear model
