@@ -74,7 +74,7 @@ fitControl <- caret::trainControl(method="cv",
 ##### Fit a model (PLS with linear model)
 ```{r pls-lm}
 pls_lm.fit <- caret::train(x = Xtrain, y = ytrain, 
-                 method = pls_lm, 
+                 method = pls.lm, 
                  ncomp = 10,
                  trControl = fitControl,
                  verbose = FALSE)

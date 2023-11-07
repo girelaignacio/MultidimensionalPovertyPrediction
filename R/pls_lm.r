@@ -1,5 +1,4 @@
-pls_lm <- function(){
-  pls_lm <- list(label = "PLS-lm",
+  pls.lm <- list(label = "PLS-lm",
                library = c("chemometrics", "stats"),
                type = "Regression",
                ## Tune over both parameters at the same time
@@ -32,8 +31,8 @@ pls_lm <- function(){
                  data <- as.data.frame(cbind(scores,X_nm))
                  colnames.pred <- colnames(data)
                  data$y <- y
-                 model.formula <- as.formula(paste0("y ~ ", paste0(colnames.pred,collapse = " + "),sep = ""))
-                 model <- lm(model.formula, data = data, na.action = "na.exclude")
+                 model.formula <- stats::as.formula(paste0("y ~ ", paste0(colnames.pred,collapse = " + "),sep = ""))
+                 model <- stats::lm(model.formula, data = data, na.action = "na.exclude")
                  model$projection <- loadings
                  model
                },
@@ -43,8 +42,6 @@ pls_lm <- function(){
                  col.time_ <- grep("^time_", colnames(newdata))
                  col.out <- c(col.region_, col.time_)
                  X <- newdata[, - col.out]
-                 print(dim(X))
-                 print(dim(newdata))
                  scores <- as.matrix(X) %*% modelFit$projection
                  colnames(scores) <- paste("score", 1:ncol(scores), sep = "")
                  scores <- as.data.frame(scores)
@@ -54,13 +51,11 @@ pls_lm <- function(){
 
                  newdata <- cbind(X_nm,scores)
                  ## Predict the linear model
-                 predict(modelFit, newdata)
+                 stats::predict(modelFit, newdata)
                },
                prob = NULL,
                varImp = NULL,
                predictors = function(x, ...) rownames(x$projection),
                levels = function(x) x$obsLevels,
                sort = function(x) x[order(x[,1]),])
-  pls_lm
-}
 
