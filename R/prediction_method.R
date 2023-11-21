@@ -1,5 +1,5 @@
 #' @export
-prediction.method <- function(model){
+prediction_method <- function(model){
   switch(model,
          #### PLS with linear regression model ####
          pls_lm = {

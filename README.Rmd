@@ -26,7 +26,7 @@ You can install the development version of MultidimensionalPovertyPrediction fro
 
 ```{r install}
 # install.packages("devtools")
-devtools::install_github("girelaignacio/MultidimensionalPovertyPrediction")
+devtools::install_github("girelaignacio/MultidimensionalPovertyPrediction", force = T, upgrade = "never", quiet =T)
 ```
 
 ## Example
@@ -35,6 +35,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r intro}
 library(MultidimensionalPovertyPrediction)
+set.seed(16)
 ## basic example code
 
 target <- "MPI"
@@ -49,7 +50,6 @@ head(data)
 ```{r tuning_parm}
 ### Set parameters for tuning parameters
 n_folds <- 5
-n_comp <- 10
 ```
 
 ##### Split train and test data
@@ -72,11 +72,18 @@ fitControl <- caret::trainControl(method="cv",
 ```
 
 ##### Fit a model (PLS with linear model)
-```{r pls-lm}
-method <- prediction.method("pls_lm")
-  
+
+First we call the prediction method
+
+```{r call.pred}  
+prediction.method <- prediction.method("pls_lm")
+```
+
+Then we train the model
+
+```{r pls-lm}  
 pls_lm.fit <- caret::train(x = Xtrain, y = ytrain, 
-                 method = method, 
+                 method = prediction.method, 
                  ncomp = 10,
                  trControl = fitControl,
                  verbose = FALSE)
@@ -84,7 +91,7 @@ pls_lm.fit <- caret::train(x = Xtrain, y = ytrain,
 
 ###### Predict!
 ```{r pls-lm_pred}
-ypred <- predict(lm.fit, Xtest)
+ypred <- predict(pls_lm.fit, Xtest)
 ```
 
 ###### Check error
