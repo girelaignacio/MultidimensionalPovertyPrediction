@@ -57,5 +57,6 @@
                varImp = NULL,
                predictors = function(x, ...) rownames(x$projection),
                levels = function(x) x$obsLevels,
-               sort = function(x) x[order(x[,1]),])
+               sort = function(x) x[order(x[,1]),]
+               )
 
