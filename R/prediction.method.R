@@ -1,3 +1,4 @@
+#' @export
 prediction.method <- function(model){
   switch(model,
          #### PLS with linear regression model ####
