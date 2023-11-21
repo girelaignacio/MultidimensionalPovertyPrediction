@@ -76,7 +76,7 @@ fitControl <- caret::trainControl(method="cv",
 First we call the prediction method
 
 ```{r call.pred}  
-prediction.method <- prediction.method("pls_lm")
+prediction.method <- prediction_method("pls_lm")
 ```
 
 Then we train the model
