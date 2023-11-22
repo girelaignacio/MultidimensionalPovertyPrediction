@@ -53,7 +53,7 @@ prediction.method <- function(model){
          #### Non-metric PLS ####
          pls.lm = {
            list(label = "PLS-lm",
-                library = c("chemometrics", "stats"),
+                library = c("chemometrics", "stats", "betaboost"),
                 type = "Regression",
                 ## Tune over both parameters at the same time
                 parameters = data.frame(parameter = c('ncomp'),
@@ -72,23 +72,12 @@ prediction.method <- function(model){
                   ## First fit the pls model, generate the training set scores,
                   ## then attach what is needed to the model object to
                   ## be used later
-
-                  model <- nonmetric.pls(y, x, dimensions = param$ncomp, scale = FALSE)
-                  model
+                  data <- cbind.data.frame(X,y)
+                  modelframe <- model.frame(y ~ . ,data)
+                  betaboost <- mboost::glmboost(y~., data, family = betaboost::BetaReg())
+                  betaboost
                 },
                 predict = function(modelFit, newdata, submodels = NULL) {
-                  ## Now apply the same scaling to the new samples
-                  col.region_ <- grep("^region_", colnames(newdata))
-                  col.time_ <- grep("^time_", colnames(newdata))
-                  col.out <- c(col.region_, col.time_)
-                  X <- newdata[, - col.out]
-                  scores <- as.matrix(X) %*% modelFit$projection
-                  colnames(scores) <- paste("score", 1:ncol(scores), sep = "")
-                  scores <- as.data.frame(scores)
-                  X_nm <- newdata[, col.out]
-
-                  newdata <- cbind(X_nm,scores)
-                  ## Predict the linear model
                   stats::predict(modelFit, newdata)
                 },
                 prob = NULL,

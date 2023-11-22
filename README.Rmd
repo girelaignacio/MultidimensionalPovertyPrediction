@@ -91,7 +91,7 @@ pls_lm.fit <- caret::train(x = Xtrain, y = ytrain,
 
 ###### Predict!
 ```{r pls-lm_pred}
-ypred <- predict(pls_lm.fit, Xtest)
+ypred <- predict(pls_lm.fit, Xtest, type = "response")
 ```
 
 ###### Check error

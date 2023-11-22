@@ -4,7 +4,7 @@ preprocessing.data <- function(which.data, target, time.format){
   data <- select.data(which.data)
 
   ## Preserve target variable (MPI, H, or A) with `target`
-  y <- data[,target]
+  y <- data[,target] + 1e-18
   ## Preserve predictors
   X <- data[,-c(1:8)]
   ## Create time format as dummy variables (one-hot encoding) or as a trend
