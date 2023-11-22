@@ -8,6 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  fig.path = "man/figures/README-",
   out.width = "100%"
 )
 ```
@@ -80,7 +81,7 @@ prediction.method <- prediction.method("beta.pls")
 
 Then we train the model
 
-```{r pls-lm, eval=F}  
+```{r beta.pls, error=F}  
 pls_lm.fit <- caret::train(x = Xtrain, y = ytrain, 
                  method = prediction.method, 
                  ncomp = 10,

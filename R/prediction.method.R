@@ -4,7 +4,7 @@ prediction.method <- function(model){
          #### Non-metric PLS with beta regression ####
          beta.pls = {
            list(label = "beta.pls",
-                library = c("chemometrics", "stats","betareg"),
+                library = c("chemometrics","stats","betareg"),
                 type = "Regression",
                 ## Tune over both parameters at the same time
                 parameters = data.frame(parameter = c('ncomp'),
