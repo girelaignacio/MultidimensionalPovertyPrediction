@@ -1,7 +1,7 @@
 #' @export
 preprocessing.data <- function(which.data, target, time.format){
   ## Select the data.frame with `which.data`
-  data <- select_dataframes(which.data)
+  data <- select.data(which.data)
 
   ## Preserve target variable (MPI, H, or A) with `target`
   y <- data[,target]

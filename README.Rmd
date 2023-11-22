@@ -26,7 +26,7 @@ You can install the development version of MultidimensionalPovertyPrediction fro
 
 ```{r install}
 # install.packages("devtools")
-devtools::install_github("girelaignacio/MultidimensionalPovertyPrediction", force = T, upgrade = "never", quiet =T)
+devtools::install_github("girelaignacio/MultidimensionalPovertyPrediction")
 ```
 
 ## Example
@@ -57,8 +57,8 @@ n_folds <- 5
 train_index <- caret::createDataPartition(data[,target], p = 0.8, list = FALSE, times = 1)
 data_train <- data[train_index,]
 data_test <- data[-train_index,]
-ytrain <- data_train[,target] ; Xtrain <- data_train[,-1]
-ytest <- data_test[,target] ; Xtest <- data_test[,-1]
+ytrain <- data_train[,target] + 0.0000000001; Xtrain <- data_train[,-1]
+ytest <- data_test[,target] + 0.0000000001; Xtest <- data_test[,-1]
 ```
 
 
@@ -76,12 +76,12 @@ fitControl <- caret::trainControl(method="cv",
 First we call the prediction method
 
 ```{r call.pred}  
-prediction.method <- prediction_method("pls_lm")
+prediction.method <- prediction_method("pls.beta")
 ```
 
 Then we train the model
 
-```{r pls-lm}  
+```{r pls-lm, error=T}  
 pls_lm.fit <- caret::train(x = Xtrain, y = ytrain, 
                  method = prediction.method, 
                  ncomp = 10,

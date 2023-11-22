@@ -1,6 +1,6 @@
 # select_dataframes.R
 
-select_dataframes <- function(x){
+select.data <- function(x){
   if(x == 1){data <- MultidimensionalPovertyPrediction::data1}
   else if(x == 2){data <- MultidimensionalPovertyPrediction::data2}
   else if(x == 5){data <- MultidimensionalPovertyPrediction::data5}

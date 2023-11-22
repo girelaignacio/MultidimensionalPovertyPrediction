@@ -1,5 +1,5 @@
 RandomKfoldCV.Model <- function(target, which.dataframe){
-  data <- select_dataframes(which.dataframe)
+  data <- select.data(which.dataframe)
 
   # split data
 
