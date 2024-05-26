@@ -1,20 +1,14 @@
 Package: MultidimensionalPovertyPrediction
-Title: This is the R package for
+Title: Predicting Multidimensional Poverty 
 Version: 0.0.0.9000
 Authors@R: 
     person("Ignacio", "Girela", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: This is a framework for evaluating multidimensional poverty prediction.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
 Depends: 
     R (>= 2.10)
 LazyData: true
-Imports: 
-    betareg,
-    caret,
-    chemometrics,
-    stats
+RoxygenNote: 7.3.1
